@@ -1,11 +1,8 @@
 function Hero(nameHero, health) {
     this.nameHero = nameHero;
-    this.health = health;
+    this.health = health || 150;
     this.shotDamages = 15;
     this.kickDamages = 5;
-    if (health === undefined ) {
-        this.health = 150;
-    }
 }
 
 Hero.prototype = {
@@ -29,7 +26,7 @@ function SuperHero (nameHero, health) {
     this.kickDamages = 10;
 }
 
-SuperHero.prototype = Hero.prototype;
+SuperHero.prototype.__proto__ = Hero.prototype;
 
 let hero1 = {},
     hero2 = {};
@@ -69,8 +66,7 @@ function heroWin() {
 }
 
 function control() {
-    console.log('Welcome n - newGame, q - kick hero1, w - shot hero1, ' +
-        'o - kick hero2, p - shot hero2,e e - exit.');
+    console.log('Welcome n - newGame, q - kick hero1, w - shot hero1, o - kick hero2, p - shot hero2,e e - exit.');
     process.stdin.setRawMode(true);
     newGame();
     process.stdin.on('readable', () => {
